@@ -19,9 +19,12 @@ async def startup_event():
     print('SUPPORTED_PARAMS', config.SUPPORTED_PARAMS)
     for params in config.SUPPORTED_PARAMS:
         cache = read_cache(params)
-        if cache is None or is_expired(cache['update'], config.CACHE_INVALID_TIME):
-            print(f'未检测到 {params} 缓存或缓存已过期')
-
+        if cache is None:
+            print(f'未找到缓存数据')
+        elif is_expired(cache['update'], config.CACHE_TIME):
+            print(f'缓存数据已过期')
+        else:
+            print(f'缓存数据有效，更新时间: {cache["update"]}')
 @app.get('/{game}/{channel}')
 async def get_game_news(game: str, channel: str, force_refresh: int = 0):
     index = f'{game}.{channel}'

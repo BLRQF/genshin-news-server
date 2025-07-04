@@ -1,5 +1,6 @@
 import requests
 import json, re, math
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from requests.adapters import HTTPAdapter
 
@@ -45,7 +46,7 @@ def get_count(api_url: str):
         return None
     return ret_data.get('data', {}).get('iTotal')
 
-def combine_news(cache_news, new_news, total):
+def combine_news(cache_news: List[Dict[str, Any]], new_news: List[Dict[str, Any]], total: int) -> List[Dict[str, Any]]:
     if total <= len(new_news):
         return new_news
     return new_news + cache_news[-(total - len(new_news)):]
@@ -90,6 +91,6 @@ def get_news(config: Dict[str, Any], cache: Optional[Dict[str, Any]]) -> Optiona
     news_list = combine_news(cache_data, new_news, news_count)
 
     return {
-        'data': news_list,
-        'update': get_time()
+        'update': datetime.fromtimestamp(get_time()).strftime('%Y-%m-%d %H:%M:%S'),
+        'data': news_list
     }

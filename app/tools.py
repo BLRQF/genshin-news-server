@@ -6,7 +6,8 @@ from app import config
 def get_time() -> int:
     return int(datetime.now().timestamp())
 
-def is_expired(cache_timestamp: int, duration: int) -> bool:
+def is_expired(cache_timestamp, duration: int) -> bool:
+    cache_timestamp = int(datetime.strptime(cache_timestamp, '%Y-%m-%d %H:%M:%S').timestamp())
     if cache_timestamp is None:
         return True
     return cache_timestamp + duration < get_time()
