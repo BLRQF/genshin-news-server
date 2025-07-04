@@ -1,0 +1,4 @@
+genshin:
+  web_cn: 
+    adapter: web
+    url: https://api-takumi-static.mihoyo.com/content_v2_user/app/16471662a82d418a/getContentList?iAppId=43&iChanId=720&iPageSize={page_size}&iPage={page}&sLangKey=zh-cn
