@@ -34,7 +34,8 @@ def extraction_news(raw_news: Dict[str, Any]) -> Dict[str, Any]:
         if result['cover']:
             break
     if video := re.search(config.VIDEO_PATTERN, raw_news.get('sContent', '')):
-        result['video'] = video.group(0)
+        if video:
+            result['video'] = video.group(0)
     return result
 
 def get_count(api_url: str):
