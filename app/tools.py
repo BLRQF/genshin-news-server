@@ -25,4 +25,4 @@ def write_cache(cache_name: str, data: dict):
         os.makedirs(config.CACHE_PATH)
     filename = os.path.join(config.CACHE_PATH, f'{cache_name}.json')
     with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        json.dump(data, f, ensure_ascii=False)
